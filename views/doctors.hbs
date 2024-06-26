@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Moonlight.us</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.ico" rel="icon">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Scheherazade+New&family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/bts.min.css">
+  
+		
+		<!-- jQuery latest library -->
+        <script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript">function add_chatinline(){var hccid=13150826;var nt=document.createElement("script");nt.async=true;nt.src="https://mylivechat.com/chatinline.aspx?hccid="+hccid;var ct=document.getElementsByTagName("script")[0];ct.parentNode.insertBefore(nt,ct);}
+      add_chatinline();</script>
+      
+
+      <style>
+        #doc_nav{
+            margin-top: 80px;
+            margin-left: 0;
+        }
+        #doc_search_input{
+            margin-left: 2px;
+        }
+      </style>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+        
+        <h2><span>🌙</span> Moonlight.us</h2>
+        <br><center>
+        <h3>You are not alone !</h3>
+      </center>
+    </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="/">&larr; Back</a></li>
+         
+      </nav>
+      <!-- .navbar -->
+    </div>
+  </header>
+
+
+
+
+
+  <nav id="doc_nav" class=" navbar-expand-lg navbar-light bg-light">
+    <form class="form-inline my-2 my-lg-0">
+        <p class="text-dark">Enter the name of the city: </p>
+      <input id="doc_search_input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button id="search_btn"  class=" btn-outline-success my-2 my-sm-0"  type="button">Search</button>
+    </form>
+  </div>
+</nav>
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">S. No.</th>
+      <th scope="col">Hospital Name</th>
+      <th scope="col">Local Address</th>
+      <th scope="col">Pincode</th>
+    </tr>
+  </thead>
+  <tbody id="table_body">
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+<script>
+    console.log("Hello");
+    const btn = document.getElementById("search_btn");
+    btn.addEventListener("click",generate);
+     async function generate(){
+        const city = document.getElementById("doc_search_input").value;
+        console.log("Hello inside");
+        const url = "../assets/csvjson.json";
+        try {
+	const response = await fetch(url);
+	const result = await response.json();
+    let content="";
+    let count=0;
+    result.forEach(myFunction);
+    function myFunction(value){
+         if(value["City"].toLowerCase()==city.toLowerCase()){
+            
+            if(!value["Hospital"].includes("Eye") && !value["Hospital"].includes("eye") && !value["Hospital"].includes("Heart") && !value["Hospital"].includes("heart") ){
+            console.log(value["Hospital"]);
+            count=count+1;
+            const hospital = `<tr>
+      <th scope="row">${count}</th>
+      <td>${value["Hospital"]}</td>
+      <td>${value["LocalAddress"]}</td>
+      <td>${value["Pincode"]}</td>
+    </tr>`
+    content=content+hospital;
+        }
+        
+    }
+    document.getElementById("table_body").innerHTML = content;
+}
+} catch (error) {
+	console.log(error);
+}
+     }
+</script>
+
+
+  </body>
+</html>
