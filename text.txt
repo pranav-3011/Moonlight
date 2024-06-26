@@ -1,0 +1,6 @@
+pandeyshreyansh50-ziN9Oa2IvgakWlv5
+
+ if(value["City"]==city){
+            if(!value["Hospital"].includes("Eye") && !value["Hospital"].includes("eye") && !value["Hospital"].includes("Heart") && !value["Hospital"].includes("heart") )
+            console.log(value["Hospital"]);
+        }
